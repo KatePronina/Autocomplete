@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Autocomplete</title>
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<form action="#" class="form">
+		<label for="city" class="form__city-label">Город</label>
+		<input type="text" class="form__city-input" id="city" placeholder="Начните вводить название" autocomplete="off">
+		<div class="form__cities cities" id="cities">
+			<!-- <ul class="cities__list"></ul> -->
+		</div>
+	</form>
+
+	<template>
+		<ul class="cities__list"></ul>
+		<li class="cities__item"></li>
+	</template>
+
+	<script src="js/app.js"></script>
+</body>
+</html>
