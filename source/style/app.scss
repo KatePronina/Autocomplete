@@ -46,6 +46,7 @@
 }
 .cities__item {
 	padding: 8px 5px;
+	text-transform: capitalize;
 
 	&:hover {
 		background-color: #3b70db;
@@ -80,4 +81,8 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+.hl {
+	background-color: transparent;
+	font-weight: bold;
 }

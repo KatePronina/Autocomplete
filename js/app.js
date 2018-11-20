@@ -4,7 +4,7 @@ const container = document.querySelector('#cities');
 
 window.startData; // исходные
 
-function renderCity (city) { // принимает объект
+function renderCity (city, value) { // принимает объект
 	const cityElem = cityTemplate.cloneNode(true).querySelector('.cities__item');
 	switch(city.type) {
 		case 'error':
@@ -15,20 +15,26 @@ function renderCity (city) { // принимает объект
 			cityElem.classList.add('loader');
 			break;
 		default:
-			cityElem.textContent = city.City;
+			if (value) {
+				const regex = new RegExp(value, 'gi');
+				cityElem.innerHTML = city.City.replace(regex, `<mark class="hl">${value}</mark>`);
+			} else {
+				cityElem.textContent = city.City;
+			}
+			
 			cityElem.classList.add('city-data');
 	}
 	return cityElem;
 }
 
-function renderData (data) { // принимает массив объектов
+function renderData (data, value) { // принимает массив объектов
 	const fragment = document.createDocumentFragment();
 	if (document.querySelector('.cities__list')) { // если список есть на странице, то удаляем его
 		document.querySelector('.cities__list').remove(); 
 	}
 	const list = cityTemplate.cloneNode(true).querySelector('.cities__list');
 	data.forEach(elem => {
-		fragment.appendChild(renderCity(elem));
+		fragment.appendChild(renderCity(elem, value));
 	})
 	list.appendChild(fragment);
 	container.appendChild(list);
@@ -99,7 +105,7 @@ function filter (e) {
 		];
 		renderData(error);
 	} else {
-		renderData(filteredData);
+		renderData(filteredData, e.target.value);
 	}
 }
 
