@@ -41,7 +41,7 @@ function renderData (data, value) { // принимает массив объе�
 	if (list.firstChild.classList.contains('city-data')) { // если в элементе данные города, то подсвечиваем первый
 		list.firstChild.classList.add('cities__item--active');
 	}
-	list.addEventListener('click', onCityClick);  // выбор данных
+	list.addEventListener('mousedown', onCityMousedown);  // выбор данных
 	list.addEventListener('mouseover', onCityMouseover); // убираем подсветку первого элемента при наведении на список 
 
 }
@@ -52,9 +52,11 @@ function onCityMouseover (e) {
 	}
 }
 
-function onCityClick (e) {
+function onCityMousedown (e) {
 	if (e.target.classList.contains('city-data')) {
 		input.value = e.target.textContent;
+		const list = document.querySelector('.cities__list');
+		list.remove();
 	}
 }
 
@@ -82,13 +84,11 @@ input.addEventListener('focus', (e) => { // отрисовка данных пр
 })
 
 input.addEventListener('blur', (e) => { // удаление данных при расфокусировке
-	const list = document.querySelector('.cities__list');
-	setTimeout(function () {
+		const list = document.querySelector('.cities__list');
+
 		if (list) {
 			list.remove();
 		}
-	}, 100);
-
 })
 
 function filter (e) {
